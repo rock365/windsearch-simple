@@ -19,7 +19,7 @@ class Wind
     private $indexDir  = '';
     private $ngramLen = 2; //ngram分词的窗口长度，默认2个字符
 
-    public function __construct($IndexName = '')
+    public function __construct($IndexName = 'default')
     {
 
         // 检测PHP环境
@@ -48,15 +48,13 @@ class Wind
             return;
         }
 
-        $dh = scandir($dir);
+        $fileList = scandir($dir);
 
-        foreach ($dh as $file) {
+        foreach ($fileList as $file) {
 
-            if ($file != "." && $file != "..") {
+            if (($file != '.') && ($file != '..')) {
                 $fullpath = $dir . $file;
-
                 if (!is_dir($fullpath)) {
-
                     unlink($fullpath);
                 } else {
                     self::del_chilren_dir($fullpath);
@@ -72,14 +70,12 @@ class Wind
      */
     private static function del_chilren_dir($dir)
     {
-        $dh = scandir($dir);
-        foreach ($dh as $file) {
+        $fileList = scandir($dir);
+        foreach ($fileList as $file) {
 
             if ($file != "." && $file != "..") {
                 $fullpath = $dir . '/' . $file;
-
                 if (!is_dir($fullpath)) {
-
                     unlink($fullpath);
                 } else {
                     self::del_chilren_dir($fullpath);
@@ -203,7 +199,6 @@ class Wind
                 }
                 //其它内容 日文 韩文 符号 ...
                 else {
-                    // 单个切分保存到数组
                     for ($w = 0; $w < mb_strlen($blk, 'utf-8'); ++$w) {
                         $resultArr[] = mb_substr($blk, $w, 1, 'utf-8');
                     }
