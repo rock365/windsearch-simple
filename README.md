@@ -1,16 +1,14 @@
-这是一个简单的PHP全文检索插件，基于倒排索引结构开发，引入即可使用。如果你的文章不多，搜索场景简单，那么这个插件对你来说非常适合。许可类型：Apache 2.0
+这是一个简单的PHP全文检索插件，基于倒排索引结构和ngram分词开发，引入即可使用。如果你的文章不多，搜索场景简单，那么这个插件对你来说非常适合。注意，此插件不适合大量数据。
 
 
-
-
-安装导入
-
+## 引入文件
+```php
     require_once 'yourdirname/windsearch-simple/Wind.php';
+```
 
 
-
-导入数据
-
+## 导入数据
+```php
     $tableName = 'test';//索引库名称
     $wind = new \WindSearch\Core\Wind($tableName);
     // 创建索$tableName引库
@@ -23,18 +21,18 @@
     
     // 循环导入完毕，批量写入文件
     $wind->batchWrite();
+```
 
 
-
-构建索引
-
+## 构建索引
+```php
     // 数据批量写入完成，开始构建索引数据
     $wind->buildIndex();
+```
 
 
-
-开始搜索
-
+## 开始搜索
+```php
     // 开始搜索，返回id集合
     $query = [
         'query'=>'脚本语言',//搜索内容
@@ -48,20 +46,22 @@
     $ids = implode(',',$ids);
     $sql = "select * from tablename where id in($ids)";
     //...
+```
 
 
-
-删除索引库
-
+## 删除索引库
+```php
     // 删除test索引库
     $tableName = 'test';//索引库名称
     $wind = new \WindSearch\Core\Wind($tableName);
     $wind->delIndex();
-
+```
 
 
 =======================================
 
-如果在商业上你需要更高级的PHP全文检索插件（同样无需安装，即插即用），可以移步此处了解。
+如果在商业上你需要更高级的PHP全文检索插件（同样无需安装，即插即用），可以移步[此处](https://rock365.github.io/)了解。
 
+weixin: azg555666
 
+email: 1593250826@qq.com
