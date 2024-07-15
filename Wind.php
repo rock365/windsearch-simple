@@ -37,7 +37,7 @@ class Wind
     }
 
     /**
-     * 清空指定文件夹，不删除根文件夹
+     * 删除文件夹
      */
     private static function del_dir($dir)
     {
@@ -67,6 +67,9 @@ class Wind
         rmdir($dir);
     }
 
+    /**
+     * 删除子文件夹
+     */
     private static function del_chilren_dir($dir)
     {
         $dh = scandir($dir);
@@ -88,9 +91,11 @@ class Wind
     }
 
 
+    /**
+     * 创建索引库文件夹
+     */
     public function createIndex()
     {
-        // 索引库
         if (!is_dir($this->indexDir . $this->IndexName . '/')) {
             mkdir($this->indexDir . $this->IndexName . '/', 0777);
         }
